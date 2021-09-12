@@ -1,42 +1,31 @@
+const tags=require('./middleware/tags.js')
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 const {bookdata,logs,sellerdata} = require('./dummyData/data')
 
 /************ GET ***************/
-
+//app.use([limit])
 app.get('/',(req,res)=>{
-    res.send('hello')
+    res.send("welcome to server:) \n| /api/v1/products => gives all products| \n |/api/v1/log => book seller details| \n |/api/v1/sellerdata => for seller data|"
+    +" \n |/api/v1/query => for queries|")
+
 })
 
-app.get('/api/1.1/products',(req,res)=>{
+app.get('/api/v1/products',(req,res)=>{
     res.status(200).json({status :"success",bookdata})
 })
 
-app.get('/api/1.1/log',(req,res)=>{
+app.get('/api/v1/log',(req,res)=>{
     res.status(200).json({status :"success",logs})
 })
 
 
-app.get('/api/1.1/sellerdata',(req,res)=>{
+app.get('/api/v1/sellerdata',(req,res)=>{
     res.status(200).json({status :"success",sellerdata})
 })
 //products
-app.get('/api/1.1/query',(req,res)=>{
-    const{search,limit}=req.query
-    let sortedProducts = [...bookdata.data]
-    if(search){
-        sortedProducts = sortedProducts.filter((product)=>{
-        return product.bookname.startsWith(search)
-     })
-    }
-    if(limit){
-        sortedProducts = sortedProducts.slice(0,Number(limit))
-    }
-    if(sortedProducts.limit<1){
-        res.status(200).json("no Data Available")
-    }
-    res.status(200).json(sortedProducts)
-})
+app.get('/api/v1/query',tags)
 
 
 

@@ -1,0 +1,29 @@
+{
+  "name": "fetchbook-backend",
+  "version": "1.0.0",
+  "description": "backend for Fetchbook",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.1.1",
+    "mongoose": "^6.0.5",
+    "node": "^16.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoHiT-engi/FetchBook-Backend.git"
+  },
+  "author": "rohit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RoHiT-engi/FetchBook-Backend/issues"
+  },
+  "homepage": "https://github.com/RoHiT-engi/FetchBook-Backend#readme"
+}

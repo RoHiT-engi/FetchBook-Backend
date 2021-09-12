@@ -10,12 +10,13 @@ const bookdata = {
         stock : "10",
         publisher : "Jaico Publishing House",
         tag : {
+            category : "history", 
             sellerid: 101,
             price : "$50",
             address : "Renaissance Industrial Smart City, Kalyan-Sape Rd, Vashere, Maharashtra 421302", 
-            delivery_status : "true",
-            condition : "good", //(good/better/best)
-            new : "true", 
+            delivery_status : true,
+            condition : "better", //(good/better/best)
+            new : true, 
             instock : "2" //2-many,1-limited/0-none
         },
     },
@@ -29,11 +30,12 @@ const bookdata = {
         stock : "9",
         publisher : "Random House Business Books",
         tag : {
+            category : "history", 
             price : "$60",
             address : "Renaissance Industrial Smart City, Kalyan-Sape Rd, Vashere, Maharashtra 421302",
-            delivery_status : "true",
+            delivery_status : true,
             condition : "good", //(good/better/best)
-            new : "true", 
+            new : true, 
             instock : "2",}
     },
     {
@@ -46,12 +48,13 @@ const bookdata = {
             stock : "6",
             publisher : "Harper Business",
             tag : {
-                sellerid: 102,
+                category : "history", 
+                sellerid : 102,
                 price : "$30",
                 address : "69, Manjal Pettai Complex, A-15, Kasukadai Bazaar, Virudhunagar, Tamil Nadu 626001",
-                delivery_status : "true",
+                delivery_status : false,
                 condition : "good", //(good/better/best)
-                new : "true", 
+                new : false, 
                 instock : "2",}
     },
     ]
@@ -59,43 +62,15 @@ const bookdata = {
 const sellerdata = {
     type : "sellerdata",
     data :[ {
-        sellerid : 101,
-        sellername : "Cloudtail India",
-        address : "Renaissance Industrial Smart City, Kalyan-Sape Rd, Vashere, Maharashtra 421302",
-        experience : "10", //(eg:-10 years)
-        certificates : "img-src",
-        phoneno : "123456789",
-        email : "abc@xyz.com",
-        books : [
-            {
-                bookid : 1,
-                auther : "",
-                publisher : "",
-		        prize : "$60",
-                img : "https://images-eu.ssl-images-amazon.com/images/I/51PV2vaUraL._SY264_BO1,204,203,200_QL40_FMwebp_.jpg",
-                bookname : "Atomic Habits", 
-                delivery_status : "true",
-                delivery_district : "",
-                condition : "good", //(good/better/best)
-                new : "true",  			
-                instock : "2", //2-many,1-limited,0-none,
-                stock : "8",
-            },
-            {
-                bookid : 2,
-                auther : "",
-                publisher : "",
-		        prize : "$60",
-                img : "https://images-eu.ssl-images-amazon.com/images/I/51PV2vaUraL._SY264_BO1,204,203,200_QL40_FMwebp_.jpg",
-                bookname : "Atomic Habits", 
-                delivery_status : "true",
-                delivery_district : "",
-                condition : "good", //(good/better/best)
-                new : "true",  			
-                instock : "2", //2-many,1-limited,0-none,
-                stock : "8",
-            },
-        ]},
+            sellerid : 101,
+            sellername : "Cloudtail India",
+            address : "Renaissance Industrial Smart City, Kalyan-Sape Rd, Vashere, Maharashtra 421302",
+            experience : "10", //(eg:-10 years)
+            certificates : "img-src",
+            phoneno : "123456789",
+            email : "abc@xyz.com",
+            books : [1, 2]
+        },
         {
             sellerid : 102,
             sellername : "InIkao",
@@ -104,23 +79,7 @@ const sellerdata = {
             certificates : "img-src",
             phoneno : "123456789",
             email : "abc@xyz.com",
-            books : [
-                {
-                    bookid : 3,
-                    auther : "Benjamin Graham",
-                    publisher : "Harper Business",
-                    prize : "$60",
-                    img : "https://images-eu.ssl-images-amazon.com/images/I/51PV2vaUraL._SY264_BO1,204,203,200_QL40_FMwebp_.jpg",
-                    bookname : "The Intelligent Investor", 
-                    delivery_status : "true",
-                    delivery_district : "xyz,abc",
-                    condition : "good", //(good/better/best)
-                    new : "true",  			
-                    instock : "2", //2-many,1-limited,0-none,
-                    stock : "8",
-                    }
-            ] 
-            
+            books : [3]
         }
     
     ]
