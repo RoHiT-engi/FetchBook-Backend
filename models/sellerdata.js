@@ -1,6 +1,6 @@
 import { url } from "inspector";
-import { Mongoose } from "mongoose";
-const SellersDataSchema = new Mongoose.schema(
+const mongoose = require('mongoose');
+const SellersDataSchema = new mongoose.Schema(
     {
         sellerid : 101,
         sellername : {type : String,required :true},
@@ -11,4 +11,4 @@ const SellersDataSchema = new Mongoose.schema(
         email : {type : String,required :true},
         books : {type : [String],required :true}
 });
-module.exports = Mongoose.model('Sellersdata',SellersDataSchema)
+module.exports = mongoose.model('Sellersdata',SellersDataSchema)

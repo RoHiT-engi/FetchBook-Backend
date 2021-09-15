@@ -1,23 +1,25 @@
 const {MongoClient} = require('mongodb');
-async function main(){
+async function connect(request,data){
     const uri = "mongodb+srv://Rohit123:Rohit123@fetchbookback.hidvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     const client = new MongoClient(uri)
+    let result = true
     try{
         await client.connect();
-        await listDatabases(client)
+        console.log('Connected to Mongo...');
+        await todo(request,client,data)
     } catch(e){
-        console.log(e);
+        console.log('Error Occured :-'+e);
+        result = false
     }finally{
         await client.close();
     }
+    return result;
 }
 
-main().catch(console.error)
-
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
- 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
- 
+async function todo(request,client,data){
+    if(request == "adduser"){
+         await client.db("DataDB").collection("userdata").insertOne(data)
+        
+    }
+}
+module.exports = connect

@@ -1,14 +1,14 @@
 import { url } from "inspector";
-import { Mongoose } from "mongoose";
-const BookDataSchema = new Mongoose.schema(
+const mongoose = require('mongoose');
+const BookDataSchema = new mongoose.Schema(
     {
-        bookname : {type : String,required :true},
+        bookname : {type : String,required :true,maxLength=50},
         img : {type : url,required :true},
         auther : {type : String,required :true},
-        sellername : {type : String,required :true},
+        sellername : {type : String,required :true,maxLength=50},
         description : {type : String,default:"not Provided"},
-        stock : {type : String,required :true},
-        publisher :{type : String},
+        stock : {type : Number,required :true},
+        publisher :{type : String,maxLength=50},
         tag:{
             category: {type : String,default:"general"},
             sellerid :{type : String,required :true,unique:true},
@@ -22,4 +22,4 @@ const BookDataSchema = new Mongoose.schema(
     }
 );
 
-module.exports = Mongoose.model('Bookdata',BookDataSchema)
+module.exports = mongoose.model('Bookdata',BookDataSchema)
