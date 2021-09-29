@@ -2,7 +2,7 @@ const tags=require('./middleware/tags.js')
 const express = require('express')
 const app = express()
 const {bookdata,logs,sellerdata} = require('./dummyData/data')
-const adduser = require('./middleware/adduser.js')
+const addsomething = require('./middleware/addseller&user.js')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -31,8 +31,10 @@ app.get('/api/v1/sellerdata',(req,res)=>{
 //products
 app.get('/api/v1/query',tags)
 /************post**************/
-app.post('/api/v1/adduser',adduser)
+app.post('/api/v1/adduser',addsomething("adduser"))
+app.post('/api/v1/addseller',addsomething("addseller"))
 
 app.listen(5000, ()=>{
     console.log('server is listening on port 5000 ...clt+c to stop')
 })
+
