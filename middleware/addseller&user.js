@@ -23,10 +23,10 @@ module.exports=(todo)=>{
     try{  
         result = await connect(thingtodo,schema,collection)
         //console.log(result)
-        res.status(200).send(`<h1>${result}</h1>`)
+        res.status(200).send(result+ ' Success')
     }catch(e){
         console.log(e)
-        res.status(400).send(e)
+        res.status(404).send(e)
     }
     next()
 }}
