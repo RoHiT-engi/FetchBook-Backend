@@ -49,4 +49,5 @@ const addorder = async(req,res,next)=>{
 }
 
 
+
 module.exports={getseller,deleteorder,addorder,isseller}

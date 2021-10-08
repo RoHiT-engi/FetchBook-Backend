@@ -1,19 +1,12 @@
+const connect = require('../config/db')
 const {bookdata,logs,sellerdata} = require('../dummyData/data')
 module.exports = (req,res,next)=>{
-    const{search,limit,tag_address,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
-    let sortedProducts = [...bookdata.data]
-    if(search){
-        sortedProducts = sortedProducts.filter((product)=>{
-        return product.bookname.startsWith(search)
-     })
-    }
-    if(limit){
-        sortedProducts = sortedProducts.slice(0,Number(limit))
-    }
-    if(sortedProducts.limit<1){
-        res.status(200).json("no Data Available")
-    }
-    if(tag_address){
+    try{
+    const{tag_category,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
+    let sortedProducts = await connect("gatall",req.body,"booksdata")
+
+    if( tag_category || tag_condition){
+        const condn = tag_category || tag_condition;
         sortedProducts = sortedProducts.filter((product)=>{
             return product.tag.address.startsWith(tag_address)
         })
@@ -28,11 +21,7 @@ module.exports = (req,res,next)=>{
          }
         })
     }
-    if(tag_condition){
-        sortedProducts = sortedProducts.filter((product)=>{
-            return product.tag.condition.startsWith(tag_condition)
-        })
-    }
+
     if(tag_new){
         sortedProducts = sortedProducts.filter((product)=>{
             if(product.tag.new.toString()==tag_new){
@@ -51,4 +40,7 @@ module.exports = (req,res,next)=>{
     }
     res.status(200).json(sortedProducts);
     next();
+    }catch(e){
+    res.status(404).send(e);
+    }
 }
