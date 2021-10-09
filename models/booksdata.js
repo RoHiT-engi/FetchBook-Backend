@@ -1,4 +1,3 @@
-import { url } from "inspector";
 const mongoose = require('mongoose');
 const BookDataSchema = new mongoose.Schema(
     {
@@ -16,6 +15,7 @@ const BookDataSchema = new mongoose.Schema(
             delivery_status : {type : Boolean,default:false},
             condition : {type : String,required :true},
             new :{type : Boolean,required :true},
+            offer : {type :Boolean,default:false},
             instock : {type : Number,required :true},
         }
     }

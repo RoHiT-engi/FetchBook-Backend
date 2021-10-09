@@ -2,18 +2,28 @@ const connect = require('../config/db')
 const {bookdata,logs,sellerdata} = require('../dummyData/data')
 module.exports = (req,res,next)=>{
     try{
-    const{tag_category,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
+    const{tag_category,tag_offers,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
     let sortedProducts = await connect("gatall",req.body,"booksdata")
 
     if( tag_category || tag_condition){
         const condn = tag_category || tag_condition;
         sortedProducts = sortedProducts.filter((product)=>{
-            return product.tag.address.startsWith(tag_address)
+            return product.tag.address.startsWith(condn)
         })
     }
     if(tag_delivery_status){
         sortedProducts = sortedProducts.filter((product)=> {
          if(product.tag.delivery_status.toString()==tag_delivery_status){
+             return true;
+         }
+         else{
+             return false;
+         }
+        })
+    }
+    if(tag_offers){
+        sortedProducts = sortedProducts.filter((product)=> {
+         if(product.tag.offer.toString()==tag_offers){
              return true;
          }
          else{

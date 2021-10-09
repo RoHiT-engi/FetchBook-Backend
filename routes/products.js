@@ -7,9 +7,7 @@ const { insertone,getall, getrandom, get4offers, getoffers, getbook, updatebook,
 router.route('/insertone').post(insertone)
 router.route('/').get(getall)
 router.route('/random').get(getrandom)
-router.route('/offerlimit').get(get4offers)
-router.route('/alloffers').get(getoffers)
 router.route('/:id').get(getbook).put(updatebook).delete(deletebook)
-router.route('/query').get(search)
+router.route('/:bookname').get(search)
 
 module.exports =  router

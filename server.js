@@ -6,6 +6,7 @@ const {bookdata,logs,sellerdata} = require('./dummyData/data')
 const addsomething = require('./middleware/addseller&user.js')
 const products = require('./routes/products')
 const seller = require('./routes/seller')
+const user = require('./routes/user')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 // routes 
 app.use('/products',products)
 app.use('/seller',seller)
+app.use('/user',user)
 /************ GET ***************/
 //app.use([limit])
 app.get('/',(req,res)=>{
@@ -30,7 +32,7 @@ app.get('/',(req,res)=>{
 //     res.status(200).json({status :"success",sellerdata})
 // })
 // //products
-// app.get('/query',tags)
+app.get('/query',tags)
 /************post**************/
 app.post('/adduser',addsomething("adduser"))
 

@@ -42,12 +42,8 @@ async function todo(request,client,data,collections){
             },{$push:{orders:{userid:data.userid,bookid:data.bookid}}},{upsert:true});break;
         case "getrandom" : 
             result = await client.db("DataDB").collection(`${collections}`).aggregate(
-                [ { $sample: { size: 3 } } ]
-             ).limit(8);break;
-        case "getoffersforhome" :
-            result = await client.db("DataDB").collection(`${collections}`).find({tag:{offer:data}}).limit(4);break;
-        case "getalloffers" :
-            result = await client.db("DataDB").collection(`${collections}`).find({tag:{offer:data}});break;
+                [ { $sample: { size: 8 } } ]
+             ).toArray;break;
         case "getbook" : 
             result = await client.db("DataDB").collection(`${collections}`).findById(data);break;
         case "updatebook" : 
@@ -60,7 +56,7 @@ async function todo(request,client,data,collections){
                 publisher : data.publisher,
                 tags : data.tags}   
             );break;
-        case "deletebook" :
+        case "delete" :
             await client.db("DataDB").collection(`${collections}`).deleteOne({_id:data});break;
         case "searchbook" : 
             result = await client.db("DataDB").collection(`${collections}`).find({bookname: data.toString});break;
@@ -74,7 +70,7 @@ async function todo(request,client,data,collections){
             },{$pull:{bookid:data.bookid,sellermail:data.sellermail}});break;
         case "getuser" :
             await client.db("DataDB").collection(`${collections}`).findOne({email:data.toString})
-        default:console.log(`You passed this request ${request}.`)
+        default:console.log(`You passed this request ${request}.`) 
     }
     return result;
 }

@@ -1,8 +1,9 @@
 const connect = require("../config/db")
-
+const BookDataSchema = require('../models/booksdata')
 const insertone = async(req,res,next)=>{
+    const schema  = new BookDataSchema(req.body)
     try{
-       await connect("insertone",req.body,"booksdata")
+       await connect("insertone",schema,"booksdata")
        res.status(200).send('Success !! added ' + req.body.bookname)
     }catch(e){
         res.status(404).send(e)
@@ -30,26 +31,6 @@ const getrandom = async(req,res,next)=>{
     }
 } 
 
-const get4offers = async(req,res,next)=>{
-    try{
-        const result = await connect("getoffersforhome",req.body,"booksdata")
-        res.status(200).json(result)
-    }catch(e){
-        res.status(404).send('error occured '+ e);
-    }
-    next()
-
-}
-const getoffers = async(req,res,next)=>{
-    try{
-        const result = await connect("getalloffers",req.body,"booksdata")
-        res.status(200).json(result)
-    }catch(e){
-        res.status(404).send('error occured '+ e);
-    }
-    next()
-
-}
 
 const getbook = async(req,res,next)=>{
     const id = req.params.id
@@ -80,7 +61,7 @@ const deletebook= async(req,res,next)=>{
     const id = req.params.id
     if(id){
     try{
-        const result = await connect("deletebook",req.params.id,"booksdata")
+        const result = await connect("delete",req.params.id,"booksdata")
         res.status(200).json(result)
     }catch(e){
         res.status(404).send('error occured '+ e);
@@ -89,10 +70,10 @@ const deletebook= async(req,res,next)=>{
 }
 
 const search = async(req,res,next)=>{
-    const search = req.query
+    const search = req.params.bookname
     if(search){
     try{
-        const result = await connect("searchbook",search,"booksdata")
+        const result = await connect("searchbook",req.params.bookname,"booksdata")
         res.status(200).json(result)
     }catch(e){
         res.status(404).send('error occured '+ e);
@@ -104,8 +85,6 @@ module.exports={
     insertone,
     getall,
     getrandom,
-    get4offers,
-    getoffers,
     getbook,
     updatebook,
     deletebook,
