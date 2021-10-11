@@ -1,6 +1,6 @@
 const connect = require('../config/db')
 const {bookdata,logs,sellerdata} = require('../dummyData/data')
-module.exports = (req,res,next)=>{
+module.exports =async (req,res,next)=>{
     try{
     const{tag_category,tag_offers,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
     let sortedProducts = await connect("gatall",req.body,"booksdata")

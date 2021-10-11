@@ -14,6 +14,7 @@ const insertone = async(req,res,next)=>{
 const getall = async(req,res,next)=>{
     try{
         const result =  await connect("getall",req.body,"booksdata")
+        console.log(result[0])
         res.status(200).json(result)
     }catch(e){
         res.status(404).send('error occured '+ e);
@@ -33,10 +34,10 @@ const getrandom = async(req,res,next)=>{
 
 
 const getbook = async(req,res,next)=>{
-    const id = req.params.id
-    if(id){
+    const {email} = req.query
+    if(email){
     try{
-        const result = await connect("getbook",req.params.id,"booksdata")
+        const result = await connect("getbook",req.query,"booksdata")
         res.status(200).json(result)
     }catch(e){
         res.status(404).send('error occured '+ e);
@@ -81,6 +82,18 @@ const search = async(req,res,next)=>{
     next()
 }
 
+const getsellerbooks = async(req,res,next)=>{
+    const {sellerid} = req.query
+    if(sellerid){
+    try{
+        const result = await connect("getsellerbooks",req.query,"booksdata")
+        res.status(200).json(result)
+    }catch(e){
+        res.status(404).send('error occured '+ e);
+    }}
+    next()
+}
+
 module.exports={
     insertone,
     getall,
@@ -88,5 +101,6 @@ module.exports={
     getbook,
     updatebook,
     deletebook,
-    search
+    search,
+    getsellerbooks
 }

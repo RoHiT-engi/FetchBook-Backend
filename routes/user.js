@@ -3,9 +3,10 @@ const addsellerUser = require('../middleware/addseller&user')
 const { addorderhistory, removeorderhistory, getuser, deleteuser } = require('../middleware/userDetails')
 const router = express.Router()
 router.route('/addorder').post(addorderhistory)
-router.route('/remove').put(removeorderhistory)
+router.route('/removeorder').put(removeorderhistory)
 router.route('/getuser').get(getuser)
 router.route('/adduser').post(addsellerUser("adduser"))
-router.route('/delete/:id').delete(deleteuser)
+router.route('/:id').delete(deleteuser) //test
+//add update user
 
 module.exports =  router

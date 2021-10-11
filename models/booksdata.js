@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const BookDataSchema = new mongoose.Schema(
     {
-        bookname : {type : String,required :true,maxLength=50},
+        bookname : {type : String,required :true},
         img : {type : [String],required :true},
         auther : {type : String,required :true},
-        sellername : {type : String,required :true,maxLength=50},
+        sellername : {type : String,required :true},
         description : {type : String,default:"not Provided"},
-        publisher :{type : String,maxLength=50,default:"not Provided"},
+        publisher :{type : String,default:"not Provided"},
         tag:{
             category: {type : String,default:"general"},
             sellerid :{type : String,required :true,unique:true},

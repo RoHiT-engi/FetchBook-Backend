@@ -8,10 +8,6 @@ const SellersDataSchema = new mongoose.Schema(
         certificates : {type : String,default:"no certificate added"},
         phoneno : {type : Number,required :true,unique:true},
         seller_email : {type : String,required :true,unique:true},
-        books : {type : [String],default:[]},
-        orders : {
-            userid :{type:String},
-            bookid :{type:String}
-        }
+        orders : {type:[Object],default:[]}
 });
 module.exports = mongoose.model('Sellersdata',SellersDataSchema)

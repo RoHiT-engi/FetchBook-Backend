@@ -1,16 +1,16 @@
 const connect = require("../config/db")
-const addorderhistory = (req,res,next)=>{
+const addorderhistory = async (req,res,next)=>{
     try{
-        const result = connect("addorderhistory",req.body,"userdata")
+        const result =await connect("addorderhistory",req.body,"userdata")
         res.status(200).send(result)
     }catch(c){
         res.status(404).send(e)
     }
     next()
 }
-const removeorderhistory = (req,res,next)=>{
+const removeorderhistory = async(req,res,next)=>{
     try{
-        const result = connect("removeorderhistory",req.body,"userdata")
+        const result = await connect("removeorderhistory",req.body,"userdata")
         res.status(200).send(result)
     }catch(c){
         res.status(404).send(e)
@@ -18,22 +18,22 @@ const removeorderhistory = (req,res,next)=>{
     next()
 }
 
-const getuser =(req,res,next)=>{
+const getuser = async(req,res,next)=>{
     const {email} = req.query
     if(email){
     try{
-        const result = connect("removeorderhistory",email,"userdata")
+        const result = await connect("getuser",email,"userdata")
         res.status(200).send(result)
     }catch(c){
         res.status(404).send(e)
     }}
     next()
 }
- const deleteuser = (req,res,next)=>{
+ const deleteuser = async (req,res,next)=>{
     const {id} = req.params.id
     if(id){
     try{
-        const result = connect("delete",req.params.id,"userdata")
+        const result = await connect("delete",req.params.id,"userdata")
         res.status(200).send(result)
     }catch(c){
         res.status(404).send(e)

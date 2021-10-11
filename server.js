@@ -2,11 +2,11 @@ const tags=require('./middleware/tags.js')
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const {bookdata,logs,sellerdata} = require('./dummyData/data')
 const addsomething = require('./middleware/addseller&user.js')
 const products = require('./routes/products')
 const seller = require('./routes/seller')
 const user = require('./routes/user')
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -19,7 +19,6 @@ app.use('/user',user)
 //app.use([limit])
 app.get('/',(req,res)=>{
     res.send("<h1>welcome to server:)</h1>")
-
 })
 
 /**********prev api********/
