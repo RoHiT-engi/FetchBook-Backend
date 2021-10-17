@@ -14,7 +14,6 @@ const insertone = async(req,res,next)=>{
 const getall = async(req,res,next)=>{
     try{
         const result =  await connect("getall",req.body,"booksdata")
-        console.log(result[0])
         res.status(200).json(result)
     }catch(e){
         res.status(404).send('error occured '+ e);

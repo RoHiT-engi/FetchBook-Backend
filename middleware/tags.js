@@ -1,14 +1,22 @@
 const connect = require('../config/db')
-const {bookdata,logs,sellerdata} = require('../dummyData/data')
+
 module.exports =async (req,res,next)=>{
     try{
-    const{tag_category,tag_offers,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
-    let sortedProducts = await connect("gatall",req.body,"booksdata")
-
-    if( tag_category || tag_condition){
-        const condn = tag_category || tag_condition;
+    const{tag_bookname,tag_category,tag_offers,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
+    let sortedProducts = await connect("getall",req.body,"booksdata")
+    
+    
+    if( tag_category || tag_condition || tag_bookname){
+        const condn = tag_category || tag_condition || tag_bookname;
         sortedProducts = sortedProducts.filter((product)=>{
-            return product.tag.address.startsWith(condn)
+            if(tag_category){
+            return product.tag.category.startsWith(condn)}
+            if(tag_condition){
+                return product.tag.condition.startsWith(condn)
+            }
+            if(tag_bookname){
+                return product.bookname.startsWith(condn)
+            }
         })
     }
     if(tag_delivery_status){
@@ -51,6 +59,7 @@ module.exports =async (req,res,next)=>{
     res.status(200).json(sortedProducts);
     next();
     }catch(e){
+        console.log(e)
     res.status(404).send(e);
     }
 }
