@@ -70,6 +70,7 @@ async function todo(request,client,data,collections){
         case "getuser" :
                 result = await client.db("DataDB").collection(`${collections}`).findOne({email: data.toString});break;
         case "getsellerbooks" : await client.db("DataDB").collection(`${collections}`).find({sellerid:data});break;
+
         default:console.log(`You passed this request ${request}.`) 
     }
     return result;

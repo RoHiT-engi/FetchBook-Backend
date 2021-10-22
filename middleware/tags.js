@@ -31,7 +31,7 @@ module.exports =async (req,res,next)=>{
     }
     if(tag_offers){
         sortedProducts = sortedProducts.filter((product)=> {
-         if(product.tag.offer.toString()==tag_offers){
+         if(product.tag.offer.toString()===tag_offers){
              return true;
          }
          else{
