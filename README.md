@@ -7,5 +7,9 @@ add in scripts (package.json)
  
  "start" : "nodemon server.js"
 
-npm start 
+npm start <br>
 to start server
+
+.env <br>
+MONOGO_URI <br>
+PORT <br>
