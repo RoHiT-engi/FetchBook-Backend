@@ -2,7 +2,7 @@ const { ObjectId } = require('bson');
 const {MongoClient} = require('mongodb');
 const { Mongoose } = require('mongoose');
 async function connect(request,data,collection){
-    const uri = "mongodb+srv://Rohit123:Rohit123@fetchbookback.hidvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    const uri = process.env.MONGO_URI
     const client = new MongoClient(uri)
     let result = null
     try{
@@ -10,7 +10,7 @@ async function connect(request,data,collection){
         console.log('Connected to Mongo...');
         result=await todo(request,client,data,collection)
     } catch(e){
-        console.log(e);
+        console.error(e);
         result=false + e
     }finally{
         await client.close();

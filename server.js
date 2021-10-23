@@ -5,7 +5,10 @@ const app = express()
 const addsomething = require('./middleware/addseller&user.js')
 const products = require('./routes/products')
 const seller = require('./routes/seller')
-const user = require('./routes/user')
+const user = require('./routes/user');
+const dotenv = require('dotenv')
+dotenv.config()
+const port  = process.env.PORT 
 
 app.use(cors())
 app.use(express.json())
@@ -35,7 +38,7 @@ app.get('/query',tags)
 /************post**************/
 app.post('/adduser',addsomething("adduser"))
 
-app.listen(5000, ()=>{
-    console.log('server is listening on port 5000 ...clt+c to stop')
+app.listen(port, ()=>{
+    console.log(`server is listening on port ${port} ...clt+c to stop`)
 })
 
