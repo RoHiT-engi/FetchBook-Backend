@@ -10,7 +10,8 @@ const BookDataSchema = new mongoose.Schema(
         tag:{
             category: {type : String,default:"general"},
             sellerid :{type : String,required :true,unique:true},
-            price : {type : String,required :true},
+            price : {type : Number,required :true},
+            offered_price : {type : Number},
             address :{type : String,required :true},
             delivery_status : {type : Boolean,default:false},
             condition : {type : String,required :true},

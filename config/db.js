@@ -25,7 +25,7 @@ async function todo(request,client,data,collections){
             await client.db("DataDB").collection(`${collections}`).createIndex({seller_email:1,sellername:1,phoneno:1,userid:1,username:1},{ unique : true });
             await client.db("DataDB").collection(`${collections}`).updateOne(data,data,{upsert:true});break;
         case "getseller" : 
-            result = await client.db("DataDB").collection(`${collections}`).findOne({seller_email: data.toString});break;
+            result = await client.db("DataDB").collection(`${collections}`).findOne({seller_email: data});break;
         case "getall" : 
             result = await client.db("DataDB").collection(`${collections}`).find({}).toArray();break;
         case "insertone" : 
