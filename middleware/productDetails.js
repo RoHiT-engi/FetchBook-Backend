@@ -81,17 +81,7 @@ const search = async(req,res,next)=>{
     next()
 }
 
-const getsellerbooks = async(req,res,next)=>{
-    const {sellerid} = req.query
-    if(sellerid){
-    try{
-        const result = await connect("getsellerbooks",req.query,"booksdata")
-        res.status(200).json(result)
-    }catch(e){
-        res.status(404).send('error occured '+ e);
-    }}
-    next()
-}
+
 
 module.exports={
     insertone,
@@ -101,5 +91,4 @@ module.exports={
     updatebook,
     deletebook,
     search,
-    getsellerbooks
 }

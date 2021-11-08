@@ -1,6 +1,5 @@
 const connect= require('../config/db')
 const SellersDataSchema = require('../models/sellerdata');
-const userdataSchema = require('../models/userdata');
 
 module.exports=(todo)=>{
     return async (req,res,next)=>{
@@ -9,7 +8,7 @@ module.exports=(todo)=>{
     let thingtodo = null 
     switch(todo){
         case "adduser" : 
-             schema = new userdataSchema(req.body);
+            //  schema = new userdataSchema(req.body);
              collection = "userdata";
              thingtodo = "uniqueupdate";break;
         case "addseller" : 

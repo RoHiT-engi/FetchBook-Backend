@@ -2,20 +2,25 @@ const connect = require('../config/db')
 
 module.exports =async (req,res,next)=>{
     try{
-    const{tag_bookname,tag_category,tag_offers,tag_price,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
+    const{tag_bookname,tag_category,tag_offers,tag_price,tag_sellerBooks,tag_delivery_status,tag_condition,tag_new,tag_instock}=req.query
     let sortedProducts = await connect("getall",req.body,"booksdata")
+
     
-    
-    if( tag_category || tag_condition || tag_bookname){
-        const condn = tag_category || tag_condition || tag_bookname;
+    if( tag_category || tag_condition || tag_bookname || tag_sellerBooks){
+        const condn = tag_category || tag_condition || tag_bookname || tag_sellerBooks;
+        console.log(condn)
         sortedProducts = sortedProducts.filter((product)=>{
             if(tag_category){
-            return product.tag.category.startsWith(condn)}
+                return product.tag.category.startsWith(condn)
+            }
             if(tag_condition){
                 return product.tag.condition.startsWith(condn)
             }
             if(tag_bookname){
                 return product.bookname.startsWith(condn)
+            }
+            if(tag_sellerBooks){
+                return product.tag.sellerid === condn
             }
         })
     }
@@ -29,6 +34,7 @@ module.exports =async (req,res,next)=>{
          }
         })
     }
+    
     if(tag_offers){
         sortedProducts = sortedProducts.filter((product)=> {
          if(product.tag.offer.toString()===tag_offers){

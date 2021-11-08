@@ -7,7 +7,7 @@ async function connect(request,data,collection){
     let result = null
     try{
         await client.connect();
-        console.log('Connected to Mongo...');
+        console.log('Connected to Mongo...' + request + ' ' + collection);
         result=await todo(request,client,data,collection)
     } catch(e){
         console.error(e);
@@ -22,8 +22,14 @@ async function todo(request,client,data,collections){
     let result = null;
     switch(request){
         case "uniqueupdate" : 
-            await client.db("DataDB").collection(`${collections}`).createIndex({seller_email:1,sellername:1,phoneno:1,userid:1,username:1},{ unique : true });
-            await client.db("DataDB").collection(`${collections}`).updateOne(data,data,{upsert:true});break;
+            await client.db("DataDB").collection(`${collections}`).findOneAndUpdate({"seller_email" :data.seller_email},{$set:{
+                "sellername" : data.sellername,
+                "seller_email" : data.seller_email,
+                "phoneno" : data.phoneno,
+                "address" : data.address,
+                "certificates" : data.certificates,
+                "experience " : data.experience,
+            }},{upsert:true});break;
         case "getseller" : 
             result = await client.db("DataDB").collection(`${collections}`).findOne({seller_email: data});break;
         case "getall" : 
@@ -59,17 +65,8 @@ async function todo(request,client,data,collections){
             await client.db("DataDB").collection(`${collections}`).deleteOne({"_id" :ObjectId(data)});break;
         case "searchbook" : 
             result = await client.db("DataDB").collection(`${collections}`).find({bookname: data.toString});break;
-        case "addorderhistory" :
-            await client.db("DataDB").collection(`${collections}`).updateOne({
-                email : data.email
-            },{$push:{"order_history":{bookid:data.bookid,sellermail:data.sellermail}}});break;
-        case "removeorderhistory" : 
-            await client.db("DataDB").collection(`${collections}`).update({
-                email : data.email
-            },{$pull:{"order_history":{bookid:data.bookid,sellermail:data.sellermail}}});break;
         case "getuser" :
                 result = await client.db("DataDB").collection(`${collections}`).findOne({email: data.toString});break;
-        case "getsellerbooks" : await client.db("DataDB").collection(`${collections}`).find({sellerid:data});break;
 
         default:console.log(`You passed this request ${request}.`) 
     }

@@ -4,7 +4,7 @@ const SellersDataSchema = new mongoose.Schema(
     {
         sellername : {type : String,required :true,unique:true},
         address : {type : String,required :true},
-        experience : {type : Number},
+        experience : {type : Number,default : 0},
         certificates : {type : String,default:"no certificate added"},
         phoneno : {type : Number,required :true,unique:true},
         seller_email : {type : String,required :true,unique:true},
