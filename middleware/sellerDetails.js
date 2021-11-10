@@ -33,7 +33,18 @@ const addorder = async(req,res,next)=>{
     next()
 }
 
-
+const getorders = async(req,res,next)=>{
+    const {email} = req.query
+    if(email){ 
+    try{
+        const result = await connect("getorders",email,"sellersdata");
+        res.status(200).json(result)
+    }catch(e){ 
+        res.status(404).send(e)
+     }
+    }
+    next();
+}
 
 
 module.exports={getseller,deleteorder,addorder}

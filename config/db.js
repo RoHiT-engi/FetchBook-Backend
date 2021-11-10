@@ -39,11 +39,12 @@ async function todo(request,client,data,collections){
         case "deleteorder" : 
             result = await client.db("DataDB").collection(`${collections}`).update({
                 seller_email:data.email
-            },{$pull:{"orders":{userid:data.userid,bookid:data.bookid}}});break;
+            },{$pull:{"orders":{sellerid:data.tag.sellerid}}});break;
         case "addorder" : 
+        const putdata = data.data
             result = await client.db("DataDB").collection(`${collections}`).updateOne({
-                seller_email:data.email
-            },{$push:{"orders":{userid:data.userid,bookid:data.bookid}}});break;
+                seller_email:data.data.tag.sellerid
+            },{$push:{"orders":{putdata}}});break;
         case "getrandom" : 
             result = await client.db("DataDB").collection(`${collections}`).aggregate(
                 [ { $sample: { size: 8 } } ]
@@ -51,20 +52,20 @@ async function todo(request,client,data,collections){
         case "getbook" : 
             result = await client.db("DataDB").collection(`${collections}`).findOne({_id:ObjectId(data)});break;
         case "updatebook" : 
-            await client.db("DataDB").collection(`${collections}`).updateOne({_id :ObjectId(data.id)},{
-                bookname : data.bookname,
-                img:data.img,
-                auther : data.auther,
-                sellername : data.sellername,
-                description : data.description,
-                publisher : data.publisher,
-                tags : data.tags}   
+            await client.db("DataDB").collection(`${collections}`).findOneAndUpdate({"_id" :ObjectId(data.id)},{$set:{
+                "bookname" : data.body.bookname,
+                "img":data.body.img,
+                "auther" : data.body.auther,
+                "sellername" : data.body.sellername,
+                "description" : data.body.description,
+                "publisher" : data.body.publisher,
+                "tag" : data.body.tag}},{upsert:true}
             );break;
         case "delete" :
             console.log(data)
             await client.db("DataDB").collection(`${collections}`).deleteOne({"_id" :ObjectId(data)});break;
         case "searchbook" : 
-            result = await client.db("DataDB").collection(`${collections}`).find({bookname: data.toString});break;
+            result = await client.db("DataDB").collection(`${collections}`).find({bookname: data.toString});break;``
         case "getuser" :
                 result = await client.db("DataDB").collection(`${collections}`).findOne({email: data.toString});break;
 
