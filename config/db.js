@@ -61,6 +61,10 @@ async function todo(request,client,data,collections){
                 "publisher" : data.body.publisher,
                 "tag" : data.body.tag}},{upsert:true}
             );break;
+        case "updateOrder" : 
+            await client.db("DataDB").collection(`${collections}`).findOneAndUpdate({"_id" :ObjectId(data.id),'orders.putdata.orderid': data.orderid},{$set:{
+                "orders.$.putdata.delivery_status" : data.delivery_status,
+                }});break;
         case "delete" :
             console.log(data)
             await client.db("DataDB").collection(`${collections}`).deleteOne({"_id" :ObjectId(data)});break;
