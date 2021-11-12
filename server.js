@@ -6,6 +6,7 @@ const addsomething = require('./middleware/addseller&user.js')
 const products = require('./routes/products')
 const seller = require('./routes/seller')
 const dotenv = require('dotenv')
+const connect = require('./config/db.js')
 dotenv.config()
 const port  = process.env.PORT || 5000
 
@@ -35,6 +36,16 @@ app.get('/',(req,res)=>{
 app.get('/query',tags)
 /************post**************/
 app.post('/adduser',addsomething("adduser"))
+app.post('/logs/insertone',(req,res)=>{
+    try{
+        const logs=req.body
+        console.log(logs)
+        connect("insertone",logs,"loggsofOrders")
+        res.status(200).json({status :"success",logs})
+    }catch(err){
+        res.status(400).json({status :"error",err})
+    }
+})
 
 app.listen(port, ()=>{
     console.log(`server is listening on port ${port} ...clt+c to stop`)

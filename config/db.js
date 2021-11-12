@@ -66,7 +66,6 @@ async function todo(request,client,data,collections){
                 "orders.$.putdata.delivery_status" : data.delivery_status,
                 }});break;
         case "delete" :
-            console.log(data)
             await client.db("DataDB").collection(`${collections}`).deleteOne({"_id" :ObjectId(data)});break;
         case "searchbook" : 
             result = await client.db("DataDB").collection(`${collections}`).find({bookname: data.toString});break;``
