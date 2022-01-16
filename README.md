@@ -9,7 +9,7 @@
 This will also increase bookstore revenue and benefit students who prefer used books (due to them being cheaper than brand new books).
 
 ---
-You can run these codes from [Frontend](https://github.com/Aarya-S/fetchbook.git) first, and then this repo to start the project!
+You can run these codes for the backend first, then run the [frontend](https://github.com/Aarya-S/fetchbook.git).
 1. `npm install`
 2. `npm start`
 
